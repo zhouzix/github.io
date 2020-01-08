@@ -19,11 +19,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          LINUX 常用命令 - 周子贤 | Blog
+          Django + Uwsgi + Nginx 的生产环境部署 - 周子贤 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://github.com/zhouzix/github.io.git/article/hexo-theme-huweihuang/">
+    <link rel="canonical" href="https://github.com/zhouzix/github.io.git/article/uwsgi/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -76,7 +76,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/article_header/微信图片_20190604204437.jpg')
+            background-image: url('/img/article_header/FLAMING MOUNTAIN.JPG')
             /*post*/
         
     }
@@ -95,12 +95,14 @@
                             
                               <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
                             
+                              <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                            
                         </div>
-                        <h1>LINUX 常用命令</h1>
-                        <h2 class="subheading">来认识一下 LINUX吧🐱‍🐉🐱‍🐉🐱‍🐉</h2>
+                        <h1>Django + Uwsgi + Nginx 的生产环境部署</h1>
+                        <h2 class="subheading">来使用一下 代理端口吧🐢🐢🐢</h2>
                         <span class="meta">
                             Posted by 周子贤 on
-                            2020-01-03
+                            2020-01-06
                         </span>
                     </div>
                 
@@ -218,22 +220,77 @@
                 post-container">
 
                 <blockquote>
-<p>很遗憾吧 那么喜欢连连张合影都没有</p>
+<p>你一定不要停下来去成为你想成为的人</p>
 </blockquote>
-<h1 id="查看磁盘">查看磁盘</h1>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df -hl :查看磁盘使用情况</span><br><span class="line">df -h /home : 查看指定目录磁盘使用情况</span><br><span class="line">du -sh ./*|grep G : 查看当前目录下文件大于1G的文件夹</span><br><span class="line">find / -type f -size +10M -a -size -100M -print0 | xargs -0 du -h | sort -nr : 查找文件大于10M小于100M,倒序排列</span><br></pre></td></tr></table></figure>
-<h1 id="查看cpu">查看CPU</h1>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">top :查看cpu 内存等使用情况</span><br><span class="line">sar -u 1 5 : 每1秒采集一次CPU使用率,供采集5次</span><br><span class="line">cat /proc/cpuinfo : 查看CPU基本信息</span><br><span class="line">cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -1 :查看CPU个数</span><br></pre></td></tr></table></figure>
-<h1 id="查看内存">查看内存</h1>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">free -m :查看内存详情</span><br><span class="line">cat /proc/meminfo : 查看内容详细信息</span><br><span class="line">vmstat -s : 显示内存使用详细信息</span><br></pre></td></tr></table></figure>
-<h1 id="查看负载">查看负载</h1>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uptime : 查询系统当前负载信息</span><br><span class="line">cat /proc/loadavg : 查看内容详细信息</span><br></pre></td></tr></table></figure>
-<h1 id="进程基本命令">进程基本命令</h1>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep python : 查看python相关进程</span><br><span class="line">ps -aux | grep python : 查看python相关进程</span><br><span class="line">top : 显示当前正在运行的进程</span><br><span class="line">pgrep -ln sshd : 通过程序的名字来查询进程的工具，一般用来判断程序是否正在运行</span><br><span class="line">pstree -apnh | grep sshd : 显示进程间的关系</span><br><span class="line">pidof sshd : 显示sshd进程的所有进程号</span><br><span class="line">kill 和 pkill : 杀死进程</span><br><span class="line">netstat -anptu | grep 22 : 查看22端口运行的服务</span><br></pre></td></tr></table></figure>
-<h1 id="查看文件常用指令">查看文件常用指令</h1>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat                   # 在命令提示符下查看文件内容</span><br><span class="line">more                  # 在命令提示符中分页查看文件内容</span><br><span class="line">less                  # 命令行中查看文件可以上下翻页反复浏览</span><br><span class="line">head                  # 命令行中查看文件头几行</span><br><span class="line">tail                  # 命令行中查看文件尾几行</span><br><span class="line">wc                    # 统计文件的单词数 行数等信息</span><br></pre></td></tr></table></figure>
-<h1 id="目录管理常用指令">目录管理常用指令</h1>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pwd                   # 查看你当前所在的目录</span><br><span class="line">cd                    # 切换目录</span><br><span class="line">ls                    # 查看显示目录的内容</span><br><span class="line">du                    # 统计目录和文件空间的占用情况</span><br><span class="line">mkdir                 # 创建新目录</span><br><span class="line">rmdir                 # 删除空目录</span><br><span class="line">touch                 # 创建文件</span><br><span class="line">rm                    # 删除文件</span><br><span class="line">ln                    # 创建硬链接</span><br><span class="line">ln -s                 # 创建软链接</span><br><span class="line">cp                    # 复制文件或目录</span><br><span class="line">mv                    # 移动文件或目录</span><br><span class="line">which                 # 查看linux命令所在的目录</span><br></pre></td></tr></table></figure>
+<table><tr><td bgcolor="orange">一些重要的概念😎   好好看哦~</td></tr></table>
+<h1 id="web协议介绍">Web协议介绍</h1>
+<p>Web协议出现顺序： CGI -&gt; FCGI -&gt; WSGI -&gt; uwsgi</p>
+<p>1. <font color="#008000">CGI:</font>  最早的协议</p>
+<p>2. <font color="#008000">FCGI:</font>  比CGI快</p>
+<p>3. <font color="#008000">WSGI:</font> Python专用的协议</p>
+<p>4. <font color="#008000">uwsgi:</font> 比FCGI和WSGI都快，是uWSGI项目自有的协议，主要特征是采用二进制来存储数据，<br>
+　　　　　　　　            之前的协议都是使用字符串，所以在存储空间和解析速度上，都优于字符串型协议.</p>
+<h1 id="uwsgi">uWSGI</h1>
+<p>uWSGI是一个Web服务器，它实现了WSGI协议、uwsgi、http等协议。</p>
+<p>1. 用于接收前端服务器转发的动态请求并处理后发给 web 应用程序。</p>
+<p>2. 它要做的就是把HTTP协议转化成语言支持的网络协议。（比如把HTTP协议转化成WSGI协议，让Python可以直接使用）</p>
+<p><font color="#FF0000">注:</font><br>
+　　　　　　　　如果架构是Nginx+uWSGI+APP，uWSGI是一个中间件<br>
+　　　　　　　　如果架构是uWSGI+APP，uWSGI是一个服务器</p>
+<h1 id="nginx">Nginx</h1>
+<ol>
+<li>
+<p>Nginx是一个Web服务器,其中的HTTP服务器功能和uWSGI功能很类似</p>
+</li>
+<li>
+<p>但是Nginx还可以用作更多用途，比如最常用的反向代理功能。</p>
+</li>
+</ol>
+<h1 id="wsgi">WSGI</h1>
+<p><font color="#008000">WSGI定义:</font></p>
+<p>1. <font color="#FF0000">wsgi是python web开发的标准，类似于协议</font>,它是服务器程序和应用程序的一个约定，规定了各自使用的接口和功能。</p>
+<p><font color="#008000">说明:</font></p>
+<p>1. 不同的框架有不同的开发方式，但是无论如何，开发出的应用程序都要和服务器程序配合，才能为用户提供服务。</p>
+<p>2. 这样，服务器程序就需要为不同的框架提供不同的支持,只有支持它的服务器才能被开发出的应用使用,这时就需要有一个标准</p>
+<p>3. WSGI是一种规范，它定义了使用python编写的web app与web server之间接口格式，实现web app与web server间的解耦。</p>
+<h1 id="django">Django</h1>
+<ol>
+<li>
+<p>Django是一个Web框架，框架的作用在于处理request和 reponse，其他的不是框架所关心的内容。</p>
+</li>
+<li>
+<p>所以如何部署Django不是Django所需要关心的。</p>
+</li>
+</ol>
+<table><tr><td bgcolor="orange">Django + Uwsgi + Nginx 的生产环境部署 🤢 要开始部署咯！</td></tr></table>
+<h1 id="准备工作">准备工作</h1>
+<p>包整项目能正常通过runserver启动并且检查没有问题</p>
+<p>安装uwsgi 并使用uWSGI启动这个服务</p>
+<ol>
+<li><font color="#FF0000"> pip install uwsgi</font></li>
+</ol>
+<p>执行这条命令的时候：一定要在这个项目目录中~</p>
+<ol start="2">
+<li><font color="#FF0000"> uwsgi --http 1.1.1.3:80 --file teacher/wsgi.py --static-map=/static=static</font></li>
+</ol>
+<h1 id="使用配置文件启动uwsgiini">使用配置文件启动uWSGI[ini]</h1>
+<p><font color="#FF0000"> 在项目目录创建uwsgi.ini文件 配置以下代码 ⬇</font><br>
+<font color="#FF0000"> 建议直接复制 改成自己的路径就好⬇</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line"><span class="meta">#</span> 项目目录</span><br><span class="line">chdir=/opt/project_teacher/teacher/</span><br><span class="line"><span class="meta">#</span> 启动uwsgi的用户名和用户组</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line"><span class="meta">#</span> 指定项目的application</span><br><span class="line">module=teacher.wsgi:application</span><br><span class="line"><span class="meta">#</span> 指定sock的文件路径</span><br><span class="line">socket=/opt/project_teacher/script/uwsgi.sock</span><br><span class="line"><span class="meta">#</span> 启用主进程</span><br><span class="line">master=true</span><br><span class="line"><span class="meta">#</span> 进程个数</span><br><span class="line">workers=5</span><br><span class="line">pidfile=/opt/project_teacher/script/uwsgi.pid</span><br><span class="line"><span class="meta">#</span> 自动移除unix Socket和pid文件当服务停止的时候</span><br><span class="line">vacuum=true</span><br><span class="line"><span class="meta">#</span> 序列化接受的内容，如果可能的话</span><br><span class="line">thunder-lock=true</span><br><span class="line"><span class="meta">#</span> 启用线程</span><br><span class="line">enable-threads=true</span><br><span class="line"><span class="meta">#</span> 设置自中断时间</span><br><span class="line">harakiri=30</span><br><span class="line"><span class="meta">#</span> 设置缓冲</span><br><span class="line">post-buffering=4096</span><br><span class="line"><span class="meta">#</span> 设置日志目录</span><br><span class="line">daemonize=/opt/project_teacher/script/uwsgi.log</span><br><span class="line"></span><br><span class="line">uwsgi.ini</span><br></pre></td></tr></table></figure>
+<p>启动项目:<br>
+<img src="/img/article/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200106115623.png" alt="启动项目:"></p>
+<h1 id="安装nginx">安装Nginx</h1>
+<p>配置yum源<br>
+<font color="#FF0000"> vim /etc/yum.repos.d/nginx.repo⬇</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[nginx]</span><br><span class="line">name=nginx repo</span><br><span class="line"><span class="meta">#</span> 下面这行centos根据你自己的操作系统修改比如：OS/rehel</span><br><span class="line"><span class="meta">#</span> 6是你Linux系统的版本，可以通过URL查看路径是否正确</span><br><span class="line">baseurl=http://nginx.org/packages/centos/6/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line"> /etc/yum.repos.d/nginx.repo</span><br></pre></td></tr></table></figure>
+<p>安装nginx<br>
+<font color="#FF0000">yum -y install nginx</font><br>
+配置nginx+uwsgi<br>
+<font color="#FF0000">vim /etc/nginx/conf.d/django.conf</font><br>
+改为自己的路径 IP</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       8888;</span><br><span class="line">    server_name  192.168.56.11;</span><br><span class="line">    client_max_body_size 5M;</span><br><span class="line">    gzip on;</span><br><span class="line">    gzip_buffers 32 4K;#压缩在内存中缓冲32块 每块4K</span><br><span class="line">    gzip_comp_level 6 ;#压缩级别 推荐6</span><br><span class="line">    gzip_min_length 4000;#开始压缩的最小长度4bit</span><br><span class="line">        gzip_types text/plain application/json application/javascript application/x-javascript application/css application/xml application/xml+rss text/javascript application/x-httpd-php image/jpeg image/gif image/png image/x-ms-bmp;</span><br><span class="line">        location / &#123;</span><br><span class="line">              include uwsgi_params;</span><br><span class="line">              uwsgi_pass 127.0.0.1:3031;     # 指定uWSGI-server的IP地址和端口,或者socket文件</span><br><span class="line">              uwsgi_ignore_client_abort on;  # 忽略uWSGI-Server返回的终止响应.</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 404 /404.html;</span><br><span class="line">            location = /40x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page 500 502 503 504 /50x.html;</span><br><span class="line">            location = /50x.html &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="用-nginx-uwsgi-启动django">用 nginx + uwsgi 启动django</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@linux-node1 demo2]# systemctl start nginx   # 开启nginx</span><br><span class="line">[root@linux-node1 demo2]# uwsgi --ini uwsgi.ini   # 启动uwsgi的django项目</span><br><span class="line"><span class="meta">#</span> http://192.168.56.11:8888/ 访问项目</span><br><span class="line">[root@linux-node1 demo2]# uwsgi --stop uwsgi.pid  # 关闭uwsgi</span><br></pre></td></tr></table></figure>
 <h1 id="have-fun-_">Have fun ^_^</h1>
 <hr>
 <!-- Place this tag in your head or just before your close body tag. -->
@@ -248,10 +305,10 @@ Peace!</p>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/uwsgi/" data-toggle="tooltip" data-placement="top" title="Django + Uwsgi + Nginx 的生产环境部署">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/article/hexo-theme-huweihuang/" data-toggle="tooltip" data-placement="top" title="LINUX 常用命令">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -300,7 +357,7 @@ Peace!</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#查看磁盘"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x78C1;&#x76D8;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#查看cpu"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x67E5;&#x770B;CPU</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#查看内存"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x5185;&#x5B58;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#查看负载"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x8D1F;&#x8F7D;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#进程基本命令"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x8FDB;&#x7A0B;&#x57FA;&#x672C;&#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#查看文件常用指令"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5E38;&#x7528;&#x6307;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#目录管理常用指令"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">&#x76EE;&#x5F55;&#x7BA1;&#x7406;&#x5E38;&#x7528;&#x6307;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#have-fun-_"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">Have fun ^_^</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#web协议介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Web&#x534F;&#x8BAE;&#x4ECB;&#x7ECD;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#uwsgi"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">uWSGI</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#nginx"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Nginx</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#wsgi"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">WSGI</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#django"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Django</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#准备工作"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x51C6;&#x5907;&#x5DE5;&#x4F5C;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#使用配置文件启动uwsgiini"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x542F;&#x52A8;uWSGI[ini]</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#安装nginx"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">&#x5B89;&#x88C5;Nginx</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#用-nginx-uwsgi-启动django"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">&#x7528; nginx + uwsgi &#x542F;&#x52A8;django</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#have-fun-_"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">Have fun ^_^</span></a></li></ol>
         
         </div>
       </aside>
@@ -321,6 +378,8 @@ Peace!</p>
                     <div class="tags">
                        
                           <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
                         
                     </div>
                 </section>
