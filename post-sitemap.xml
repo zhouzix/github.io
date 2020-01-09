@@ -8,7 +8,7 @@
 
     <url>
         <loc>https://github.com/zhouzix/github.io.git/article/uwsgi/</loc>
-        <lastmod>2020-01-08T01:48:24.167Z</lastmod>
+        <lastmod>2020-01-09T12:21:30.336Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,15 @@
 
     <url>
         <loc>https://github.com/zhouzix/github.io.git/article/hexo-theme-huweihuang/</loc>
-        <lastmod>2020-01-06T02:04:20.015Z</lastmod>
+        <lastmod>2020-01-09T12:14:56.927Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://github.com/zhouzix/github.io.git/article/redis/</loc>
+        <lastmod>2020-01-09T11:36:54.724Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
